@@ -2,8 +2,43 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="600"
+        Width="900" Height="600" CanResize="False"
         x:Class="textAnalyzer.MainWindow"
         Title="textAnalyzer">
-    Welcome to Avalonia!
+
+    <Grid ColumnDefinitions="1*" RowDefinitions="50, 200, 50, 300"
+          Background="RosyBrown">
+        <StackPanel Grid.Row="0" Grid.Column="0"
+                    HorizontalAlignment="Center" Orientation="Horizontal">
+            <RadioButton GroupName="inputType" Content="Input in TextBox" IsChecked="True" />
+            <RadioButton GroupName="inputType" Content="input from File" />
+        </StackPanel>
+        <Panel Grid.Column="0"
+               Grid.Row="1" IsVisible="False"
+               Background="Aquamarine">
+            <TextBox Width="700" Height="150" TextWrapping="Wrap"></TextBox>
+        </Panel>
+        <StackPanel Grid.Column="0"
+               Grid.Row="1" IsVisible="True"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center">
+            <Button Margin="0 0 0 50">Open File</Button>
+            <TextBlock HorizontalAlignment="Center">File name</TextBlock>
+        </StackPanel>
+        <Panel Grid.Row="2" Grid.Column="0"
+               Background="Bisque">
+            <Button HorizontalAlignment="Center" VerticalAlignment="Center">Analyze Text</Button>
+        </Panel>
+        <Grid Grid.Row="3" Background="Chocolate" RowDefinitions="1*,1*,50"
+              ColumnDefinitions="2*,3*,2*">
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">Word count "буква" count</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="1" >Распределениее кириллицы</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" >Распределение латиницы</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">10 long, 10 often words</TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">союзы, предлоги</TextBlock>
+        </Grid>
+
+    </Grid>
+
 </Window>
