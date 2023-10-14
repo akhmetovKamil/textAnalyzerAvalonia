@@ -1,0 +1,29 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style Selector="Button, StackPanel">
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+    </Style>
+    
+    <Style Selector="Grid.Main">
+        <Setter Property="Background" Value="Bisque"></Setter>
+    </Style>
+    <Style Selector="StackPanel.Radio">
+        <Setter Property="Orientation" Value="Horizontal"></Setter>
+    </Style>
+    <Style Selector="TextBox.InputField">
+        <Setter Property="Width" Value="700"></Setter>
+        <Setter Property="Height" Value="150"></Setter>
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+    </Style>
+    <Style Selector="TextBlock.FileName">
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+    </Style>
+    
+    <Style Selector="Rectangle">
+        <Setter Property="Fill" Value="Black"></Setter>
+        <Setter Property="Width" Value="800"></Setter>
+        <Setter Property="Height" Value="2"></Setter>
+    </Style>
+</Styles>

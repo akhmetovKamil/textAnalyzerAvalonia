@@ -7,33 +7,33 @@
         x:Class="textAnalyzer.MainWindow"
         Title="textAnalyzer">
 
-    <Grid ColumnDefinitions="1*" RowDefinitions="50, 200, 50, 300"
-          Background="RosyBrown">
-        <StackPanel Grid.Row="0" Grid.Column="0"
-                    HorizontalAlignment="Center" Orientation="Horizontal">
-            <RadioButton GroupName="inputType" Content="Input in TextBox" IsChecked="True" />
+    <Grid RowDefinitions="50, Auto, 200, Auto, 50, Auto, 300"
+          ColumnDefinitions="1*" Classes="Main">
+        <StackPanel Grid.Row="0" Grid.Column="0" Classes="Radio">
+            <RadioButton GroupName="inputType" Content="Input in TextBox" 
+                         IsChecked="True" />
             <RadioButton GroupName="inputType" Content="input from File" />
         </StackPanel>
+        <Rectangle Grid.Row="1"></Rectangle>
         <Panel Grid.Column="0"
-               Grid.Row="1" IsVisible="False"
-               Background="Aquamarine">
-            <TextBox Width="700" Height="150" TextWrapping="Wrap"></TextBox>
+               Grid.Row="2" IsVisible="True">
+            <TextBox Classes="InputField"></TextBox>
         </Panel>
         <StackPanel Grid.Column="0"
-               Grid.Row="1" IsVisible="True"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center">
+               Grid.Row="2" IsVisible="False">
             <Button Margin="0 0 0 50">Open File</Button>
-            <TextBlock HorizontalAlignment="Center">File name</TextBlock>
+            <TextBlock Classes="FileName">File name</TextBlock>
         </StackPanel>
-        <Panel Grid.Row="2" Grid.Column="0"
-               Background="Bisque">
-            <Button HorizontalAlignment="Center" VerticalAlignment="Center">Analyze Text</Button>
+        <Rectangle Grid.Row="3"></Rectangle>
+        <Panel Grid.Row="4" Grid.Column="0">
+            <Button>Analyze Text</Button>
+            
         </Panel>
-        <Grid Grid.Row="3" Background="Chocolate" RowDefinitions="1*,1*,50"
+        <Rectangle Grid.Row="5"></Rectangle>
+        <Grid Grid.Row="6" RowDefinitions="1*,1*,50"
               ColumnDefinitions="2*,3*,2*">
             <TextBlock Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">Word count "буква" count</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1" >Распределениее кириллицы</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="1" >Распределение кириллицы</TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="1" >Распределение латиницы</TextBlock>
             <TextBlock Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">10 long, 10 often words</TextBlock>
             <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">союзы, предлоги</TextBlock>
