@@ -31,8 +31,8 @@
         </Panel>
         <StackPanel Grid.Column="0"
                     Grid.Row="2" IsVisible="False" x:Name="FilePanel">
-            <Button Margin="0 0 0 50">Open File</Button>
-            <TextBlock Classes="FileName">File name</TextBlock>
+            <Button Margin="0 0 0 50" Click="OpenFileButton_Click">Open File</Button>
+            <TextBlock Classes="FileName" x:Name="FileName">File name</TextBlock>
         </StackPanel>
         <Rectangle Grid.Row="3"></Rectangle>
         <Panel Grid.Row="4" Grid.Column="0">
