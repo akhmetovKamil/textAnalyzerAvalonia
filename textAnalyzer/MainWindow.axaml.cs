@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -8,15 +7,56 @@ namespace textAnalyzer;
 
 public partial class MainWindow : Window
 {
-    public MainWindow()
-    {
-        InitializeComponent();
-    }
-
-
     public string Text;
     public bool IsFieldOpened = true;
     public bool IsFilePicked = false;
+    public TextAnalyzer Analyzer;
+
+    public MainWindow()
+    {
+        InitializeComponent();
+        Analyzer = new TextAnalyzer();
+    }
+
+    // Create class Analyze
+    public class TextAnalyzer
+    {
+        private string Text;
+        private string[] Words;
+        private string[] LongestWords;
+        private string[] MostCommonWords;
+        private string[] Yoparesete; // TODO перевести "союзы и предлоги"
+        private int WordsCount;
+        private int LettersCount;
+        // TODO dict для распределения по алфавитам
+
+         public (string Text, string[] Words, string[] LongestWords, string[] MostCommonWords, string[] Yoparesete,int WordsCount,int LettersCount) GetResults()
+         {
+             return (Text, Words, LongestWords, MostCommonWords, Yoparesete, WordsCount, LettersCount);
+         }
+         
+        public void StartAnalysis(string text)
+        {
+            Text = text;
+            Words = Text.Split(' ');
+            WordsCount = Words.Length;
+            LettersCount = Text.Length;
+            LongestWords = GetLongestWords();
+            MostCommonWords = GetMostCommonWords();
+            // other methods
+        }
+        
+        private string[] GetMostCommonWords()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private string[] GetLongestWords()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
 
     private async void OpenFileButton_Click(object sender, RoutedEventArgs e)
     {
@@ -37,21 +77,15 @@ public partial class MainWindow : Window
 
     private void AnalyzeText_OnClick(object sender, RoutedEventArgs e)
     {
-        СheckIsTextNotNull();
         if (AnalyzeText.IsEnabled)
         {
-            Text = IsFieldOpened ? Field.Text : "Run function which open file";
+            Text = IsFieldOpened ? Field.Text : Text;
+            Analyzer.StartAnalysis(Text);
+            var results = Analyzer.GetResults();
+            // TODO Show results in xaml
         }
     }
 
-    private void СheckIsTextNotNull()
-    {
-        if (IsFieldOpened) AnalyzeText.IsEnabled = string.IsNullOrEmpty(Field.Text);
-        else
-        {
-            // Проверять открыт ли файл
-        }
-    }
 
     private void BoolSwitcher(bool isField, bool isFile, bool isOpened)
     {
