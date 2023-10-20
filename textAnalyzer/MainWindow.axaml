@@ -31,7 +31,7 @@
         </Panel>
         <StackPanel Grid.Column="0"
                     Grid.Row="2" IsVisible="False" x:Name="FilePanel">
-            <Button Margin="0 0 0 50" Click="OpenFileButton_Click">Open File</Button>
+            <Button Margin="0 0 0 50" Click="OpenFile_OnClick">Open File</Button>
             <TextBlock Classes="FileName" x:Name="FileName">File name</TextBlock>
         </StackPanel>
         <Rectangle Grid.Row="3"></Rectangle>
@@ -42,11 +42,11 @@
         <Rectangle Grid.Row="5"></Rectangle>
         <Grid Grid.Row="6" RowDefinitions="1*,1*,50"
               ColumnDefinitions="2*,3*,2*">
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="Temp">Word count "буква" count</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1">Распределение кириллицы</TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="1">Распределение латиницы</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">10 long, 10 often words</TextBlock>
-            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">союзы, предлоги</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="WordsCount">Words count</TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" x:Name="LettersCount">LettersCount</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="LettersDistribution">Alphabet distribution</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="MostCommonWords">Common</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="LongestWords">Long</TextBlock>
         </Grid>
 
     </Grid>

@@ -1,5 +1,5 @@
-using System;
 using System.IO;
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 
@@ -7,7 +7,7 @@ namespace textAnalyzer;
 
 public partial class MainWindow : Window
 {
-    public string Text;
+    public string? Text;
     public bool IsFieldOpened = true;
     public bool IsFilePicked = false;
     public TextAnalyzer Analyzer;
@@ -16,53 +16,12 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         Analyzer = new TextAnalyzer();
-    }
-
-    // Create class Analyze
-    public class TextAnalyzer
-    {
-        private string Text;
-        private string[] Words;
-        private string[] LongestWords;
-        private string[] MostCommonWords;
-        private string[] Yoparesete; // TODO перевести "союзы и предлоги"
-        private int WordsCount;
-        private int LettersCount;
-        // TODO dict для распределения по алфавитам
-
-         public (string Text, string[] Words, string[] LongestWords, string[] MostCommonWords, string[] Yoparesete,int WordsCount,int LettersCount) GetResults()
-         {
-             return (Text, Words, LongestWords, MostCommonWords, Yoparesete, WordsCount, LettersCount);
-         }
-         
-        public void StartAnalysis(string text)
-        {
-            Text = text;
-            Words = Text.Split(' ');
-            WordsCount = Words.Length;
-            LettersCount = Text.Length;
-            LongestWords = GetLongestWords();
-            MostCommonWords = GetMostCommonWords();
-            // other methods
-        }
         
-        private string[] GetMostCommonWords()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        private string[] GetLongestWords()
-        {
-            throw new System.NotImplementedException();
-        }
     }
-
-
-    private async void OpenFileButton_Click(object sender, RoutedEventArgs e)
+    private async void OpenFile_OnClick(object sender, RoutedEventArgs e)
     {
         // TODO Replace with TopLevel.StorageProvider
-        OpenFileDialog dialog = new OpenFileDialog();
-        dialog.AllowMultiple = false;
+        OpenFileDialog dialog = new OpenFileDialog(); dialog.AllowMultiple = false;
         dialog.Filters.Add(new FileDialogFilter() { Name = "Text files", Extensions = { "txt" } });
         var result = await dialog.ShowAsync(this);
         if (result != null)
@@ -82,10 +41,13 @@ public partial class MainWindow : Window
             Text = IsFieldOpened ? Field.Text : Text;
             Analyzer.StartAnalysis(Text);
             var results = Analyzer.GetResults();
-            // TODO Show results in xaml
+            WordsCount.Text = results.WordsCount;
+            LettersCount.Text = results.LettersCount;
+            MostCommonWords.Text = results.MostCommonWords;
+            LongestWords.Text = results.LongestWords;
+            LettersDistribution.Text = results.LettersDistribution;
         }
     }
-
 
     private void BoolSwitcher(bool isField, bool isFile, bool isOpened)
     {
@@ -105,4 +67,5 @@ public partial class MainWindow : Window
     {
         AnalyzeText.IsEnabled = !string.IsNullOrEmpty(Field.Text);
     }
+    
 }
