@@ -6,7 +6,7 @@ namespace textAnalyzer;
 
 public class TextAnalyzer
 {
-    private string _text = "";
+    private string? _text = "";
     private string[] _words = Array.Empty<string>();
     private string[] _longestWords = Array.Empty<string>();
     private string[] _mostCommonWords = Array.Empty<string>();
@@ -23,20 +23,16 @@ public class TextAnalyzer
         'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь',
         'э', 'ю', 'я'
     };
-
     
     
-
-
-    public (string Text, string LongestWords, string MostCommonWords, string
-        WordsCount, string LettersCount, string LettersDistribution) GetResults()
+    public (string LongestWords, string MostCommonWords, string WordsCount, string LettersCount, string LettersDistribution) GetResults()
     {
-        return (_text, 
+        return (
             string.Join("\n",_longestWords), 
             string.Join("\n",_mostCommonWords),
             _wordsCount.ToString(), 
             _lettersCount.ToString(),
-            string.Join("\n", _lettersDistribution!.Select(x => $"{x.Key}: {x.Value}")));
+            string.Join("\n", _lettersDistribution!.Select(x => $"{x.Key}: {x.Value}")))!;
     }
 
     public void StartAnalysis(string? text)
@@ -52,12 +48,8 @@ public class TextAnalyzer
 
     private Dictionary<char, int> GetLettersDistribution()
     {
-        var lettersCountDict = new Dictionary<char, int>();
+        var lettersCountDict = _alphabet.ToDictionary(x => x, x => 0);
         var lettersDistribution = new Dictionary<char, int>();
-        foreach (var letter in _alphabet)
-        {
-            lettersCountDict[letter] = 0;
-        }
         foreach (var letter in _text!.ToLower())
         {
             lettersCountDict[letter] = lettersCountDict.TryGetValue(letter, out var value) ? value + 1 : 1;
@@ -65,7 +57,7 @@ public class TextAnalyzer
         foreach (var letter in _alphabet)
         {
             lettersDistribution[letter] = 100 * lettersCountDict[letter] / _lettersCount;
-        }
+        } 
         return lettersDistribution;
     }
     

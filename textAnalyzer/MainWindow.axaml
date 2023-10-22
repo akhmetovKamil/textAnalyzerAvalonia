@@ -12,7 +12,7 @@
         
         <DockPanel Grid.Row="0" Grid.Column="0">
             <StackPanel DockPanel.Dock="Right" Classes="Output">
-                <TextBox>output</TextBox>
+                <TextBox x:Name="OutputFileName">output</TextBox>
                 <TextBlock>.txt</TextBlock>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Classes="Output">
@@ -36,8 +36,7 @@
         </StackPanel>
         <Rectangle Grid.Row="3"></Rectangle>
         <Panel Grid.Row="4" Grid.Column="0">
-            <Button Click="AnalyzeText_OnClick" x:Name="AnalyzeText">Analyze Text</Button>
-
+            <Button Click="AnalyzeText_OnClick" x:Name="AnalyzeText" IsEnabled="False">Analyze Text</Button>
         </Panel>
         <Rectangle Grid.Row="5"></Rectangle>
         <Grid Grid.Row="6" RowDefinitions="1*,1*,50"
