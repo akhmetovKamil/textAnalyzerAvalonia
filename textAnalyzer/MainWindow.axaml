@@ -3,51 +3,53 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="600"
-        Width="900" Height="600" CanResize="False"
+        Width="1200" Height="600" CanResize="False"
         x:Class="textAnalyzer.MainWindow"
         Title="textAnalyzer">
-
-    <Grid RowDefinitions="50, Auto, 200, Auto, 50, Auto, 300"
-          ColumnDefinitions="1*" Classes="Main">
-        
-        <DockPanel Grid.Row="0" Grid.Column="0">
-            <StackPanel DockPanel.Dock="Right" Classes="Output">
-                <TextBox x:Name="OutputFileName">output</TextBox>
-                <TextBlock>.txt</TextBlock>
-            </StackPanel>
-            <StackPanel HorizontalAlignment="Center" Classes="Output">
-                <RadioButton GroupName="inputType" Content="Input in TextBox"
+    <Grid RowDefinitions="*" ColumnDefinitions="425, 775">
+        <Border Classes="Input">
+            <Grid Grid.Column="0" Classes="Input" RowDefinitions="115, 350, 115, 20"
+                  ColumnDefinitions="*, *">
+                <RadioButton Grid.Row="0" Grid.Column="0" Content="Input From TextBox" GroupName="inputType"
                              IsChecked="True" Click="SwitchPanel_OnClick" x:Name="FieldButton" />
-                <RadioButton GroupName="inputType" Content="input from File" 
+                <RadioButton Grid.Row="0" Grid.Column="1" Content="Input From File" GroupName="inputType"
                              Click="SwitchPanel_OnClick" x:Name="FileButton" />
-            </StackPanel>
-            
-        </DockPanel>
+                <Panel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="FieldPanel">
+                    <TextBox Classes="Field" x:Name="Field" TextChanged="Field_OnTextChanged"
+                             Watermark="Start typing..." />
+                </Panel>
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Classes="InputFile"
+                            Grid.Row="1" IsVisible="False" x:Name="FilePanel">
+                    <Button Margin="0 0 0 50" Click="OpenFile_OnClick" Content="Pick File"/>
+                    <StackPanel>
+                        <TextBlock>Picked File Name</TextBlock>
+                        <TextBlock x:Name="FileName">not picked</TextBlock>
+                    </StackPanel>
 
-        <Rectangle Grid.Row="1"></Rectangle>
-        <Panel Grid.Column="0"
-               Grid.Row="2" IsVisible="True" x:Name="FieldPanel">
-            <TextBox Classes="InputField" x:Name="Field" TextChanged="Field_OnTextChanged"></TextBox>
-        </Panel>
-        <StackPanel Grid.Column="0"
-                    Grid.Row="2" IsVisible="False" x:Name="FilePanel">
-            <Button Margin="0 0 0 50" Click="OpenFile_OnClick">Open File</Button>
-            <TextBlock Classes="FileName" x:Name="FileName">File name</TextBlock>
-        </StackPanel>
-        <Rectangle Grid.Row="3"></Rectangle>
-        <Panel Grid.Row="4" Grid.Column="0">
-            <Button Click="AnalyzeText_OnClick" x:Name="AnalyzeText" IsEnabled="False">Analyze Text</Button>
-        </Panel>
-        <Rectangle Grid.Row="5"></Rectangle>
-        <Grid Grid.Row="6" RowDefinitions="1*,1*,50"
-              ColumnDefinitions="2*,3*,2*">
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="WordsCount">Words count</TextBlock>
-            <TextBlock Grid.Row="2" Grid.Column="0" x:Name="LettersCount">LettersCount</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1" x:Name="LettersDistribution">Alphabet distribution</TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="MostCommonWords">Common</TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="LongestWords">Long</TextBlock>
+                </StackPanel>
+                <StackPanel Classes="OutputFile" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                    <TextBox x:Name="OutputFileName">output</TextBox>
+                    <TextBlock>.txt</TextBlock>
+                </StackPanel>
+                <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Classes="StatusBar"
+                           x:Name="StatusBar">
+                    Success
+                </TextBlock>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1" Classes="Output">
+            <Button Click="AnalyzeText_OnClick" x:Name="AnalyzeText" IsEnabled="False" Content="Analyze Text"></Button>
+            <Grid RowDefinitions="1*,1*,50"
+                  ColumnDefinitions="2*,3*,2*">
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="WordsCount">Words count</TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="0" x:Name="LettersCount">LettersCount</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="LettersDistribution">Alphabet distribution</TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="MostCommonWords">Common</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="LongestWords">Long</TextBlock>
+            </Grid>
         </Grid>
-
     </Grid>
+
 
 </Window>

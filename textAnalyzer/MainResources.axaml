@@ -1,0 +1,15 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="Main" Color="#015367"></SolidColorBrush>
+    <SolidColorBrush x:Key="Secondary" Color="#75DBF3"></SolidColorBrush>
+    <SolidColorBrush x:Key="SecondaryHovered" Color="#05CBFA"></SolidColorBrush>
+    <SolidColorBrush x:Key="SecondaryDisabled" Color="#5C93A0"></SolidColorBrush>
+    
+    <SolidColorBrush x:Key="MainBackground" Color="#04819E"></SolidColorBrush>
+    <SolidColorBrush x:Key="SecondaryBackground" Color="#38B2CE"></SolidColorBrush>
+    
+    <SolidColorBrush x:Key="StatusBarSuccess" Color="#48C334"></SolidColorBrush>
+    <SolidColorBrush x:Key="StatusBarWaiting" Color="#EEE749"></SolidColorBrush>
+    <SolidColorBrush x:Key="StatusBarError" Color="#FF7474"></SolidColorBrush>
+    
+</ResourceDictionary>
