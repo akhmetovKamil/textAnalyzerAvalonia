@@ -34,6 +34,8 @@ public partial class MainWindow : Window
         TextFromFile = await File.ReadAllTextAsync(file[0].Path.AbsolutePath);
         FileName.Text = Path.GetFileName(file[0].Name);
         AnalyzeText.IsEnabled = true;
+        AnalyzeText.IsVisible = true;
+        Results.IsVisible = false;
     }
 
     private async void SaveFile(string text)
@@ -47,9 +49,26 @@ public partial class MainWindow : Window
         var results = Analyzer.GetResults();
         WordsCount.Text = results.WordsCount;
         LettersCount.Text = results.LettersCount;
-        MostCommonWords.Text = results.MostCommonWords;
-        LongestWords.Text = results.LongestWords;
-        LettersDistribution.Text = results.LettersDistribution;
+        foreach (var word in results.MostCommonWords)
+        {
+            var w = new TextBlock();
+            w.Text = word;
+            MostCommonWords.Children.Add(w);
+        }
+        foreach (var word in results.LongestWords)
+        {
+            var w = new TextBlock();
+            w.Text = word;
+            LongestWords.Children.Add(w);
+        }
+        foreach (var letters in results.LettersDistribution)
+        {
+            var w = new TextBlock();
+            w.Text = letters;
+            LettersDistribution.Children.Add(w);
+        }
+        Results.IsVisible = true;
+        AnalyzeText.IsVisible = false;
         string joinedText = string.Join("\n", results);
         SaveFile(joinedText);
     }
@@ -72,5 +91,7 @@ public partial class MainWindow : Window
     private void Field_OnTextChanged(object? sender, TextChangedEventArgs e)
     {
         AnalyzeText.IsEnabled = !string.IsNullOrEmpty(Field.Text);
+        AnalyzeText.IsVisible = true;
+        Results.IsVisible = false;
     }
 }

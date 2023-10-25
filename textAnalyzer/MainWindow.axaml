@@ -20,12 +20,11 @@
                 </Panel>
                 <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Classes="InputFile"
                             Grid.Row="1" IsVisible="False" x:Name="FilePanel">
-                    <Button Margin="0 0 0 50" Click="OpenFile_OnClick" Content="Pick File"/>
+                    <Button Margin="0 0 0 50" Click="OpenFile_OnClick" Content="Pick File" />
                     <StackPanel>
                         <TextBlock>Picked File Name</TextBlock>
                         <TextBlock x:Name="FileName">not picked</TextBlock>
                     </StackPanel>
-
                 </StackPanel>
                 <StackPanel Classes="OutputFile" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
                     <TextBox x:Name="OutputFileName">output</TextBox>
@@ -40,16 +39,32 @@
 
         <Grid Grid.Column="1" Classes="Output">
             <Button Click="AnalyzeText_OnClick" x:Name="AnalyzeText" IsEnabled="False" Content="Analyze Text"></Button>
-            <Grid RowDefinitions="1*,1*,50"
-                  ColumnDefinitions="2*,3*,2*">
-                <TextBlock Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" x:Name="WordsCount">Words count</TextBlock>
-                <TextBlock Grid.Row="2" Grid.Column="0" x:Name="LettersCount">LettersCount</TextBlock>
-                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="LettersDistribution">Alphabet distribution</TextBlock>
-                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="MostCommonWords">Common</TextBlock>
-                <TextBlock Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="LongestWords">Long</TextBlock>
+            <Grid RowDefinitions="85,220, 290"
+                  ColumnDefinitions="470, 300" IsVisible="False" x:Name="Results">
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Classes="Results" Text="Results" />
+                <StackPanel Grid.Row="1" Grid.Column="0" Classes="MainInfo">
+                    <StackPanel>
+                        <TextBlock>Words Count:</TextBlock>
+                        <TextBlock x:Name="WordsCount"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock>Letters Count:</TextBlock>
+                        <TextBlock x:Name="LettersCount"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="1" Classes="Longest" x:Name="LongestWords">
+                    <TextBlock Classes="Title">10 Longest Words</TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="0" Classes="Distribution" >
+                    <TextBlock Classes="Title">Letters Distribution</TextBlock>
+                    <WrapPanel x:Name="LettersDistribution"></WrapPanel>
+                </StackPanel>
+                
+                <StackPanel Grid.Row="2" Grid.Column="1" Classes="Common" x:Name="MostCommonWords">
+                    <TextBlock Classes="Title">10 Most Common Words</TextBlock>
+                </StackPanel>
+
             </Grid>
         </Grid>
     </Grid>
-
-
 </Window>

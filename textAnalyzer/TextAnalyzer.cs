@@ -25,14 +25,15 @@ public class TextAnalyzer
     };
     
     
-    public (string LongestWords, string MostCommonWords, string WordsCount, string LettersCount, string LettersDistribution) GetResults()
+    public (string[] LongestWords, string[] MostCommonWords, string WordsCount, string LettersCount, string[] LettersDistribution) GetResults()
     {
         return (
-            string.Join("\n",_longestWords), 
-            string.Join("\n",_mostCommonWords),
-            _wordsCount.ToString(), 
+            _longestWords,
+            _mostCommonWords,
+            _wordsCount.ToString(),
             _lettersCount.ToString(),
-            string.Join("\n", _lettersDistribution!.Select(x => $"{x.Key}: {x.Value}")))!;
+            _lettersDistribution!.Select(x => $"{x.Key}: {x.Value}").ToArray());
+
     }
 
     public void StartAnalysis(string? text)
@@ -69,7 +70,7 @@ public class TextAnalyzer
             wordsCount[word] = wordsCount.TryGetValue(word, out var value) ? value + 1 : 1;
         }
 
-        return wordsCount.OrderByDescending(x => x.Value).Take(10).Select(x => x.Key).ToArray();
+        return wordsCount.OrderByDescending(x => x.Value).Take(10).Select(x => x.Key).Select((word, index) => $"{index}) {word}").ToArray();;
     }
 
     private string[] GetLongestWords()
@@ -80,6 +81,6 @@ public class TextAnalyzer
             wordsLength[word] = word.Length;
         }
 
-        return wordsLength.OrderByDescending(x => x.Value).Take(10).Select(x => x.Key).ToArray();
+        return wordsLength.OrderByDescending(x => x.Value).Take(10).Select(x => x.Key).Select((word, index) => $"{index}) {word}").ToArray();;
     }
 }
